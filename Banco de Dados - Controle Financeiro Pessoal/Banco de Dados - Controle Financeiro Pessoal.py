@@ -50,10 +50,18 @@ def generate_graphs():
     incomes = sum(income["amount"] for income in data["incomes"])
     labels = ['Despesas', 'Receitas']
     values = [expenses, incomes]
-    colors = ['#ff9999','#66b3ff']
+    colors = ['#ff9999', '#66b3ff']
+
+    # Função para criar etiquetas personalizadas
+    def make_autopct(values):
+        def my_autopct(pct):
+            total = sum(values)
+            val = int(round(pct * total / 100.0))
+            return f'{pct:.1f}%\nR$ {val:,}'
+        return my_autopct
 
     plt.figure(figsize=(10, 5))
-    plt.pie(values, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+    plt.pie(values, labels=labels, colors=colors, autopct=make_autopct(values), startangle=90)
     plt.title('Distribuição de Despesas e Receitas')
     plt.show()
 
