@@ -1,0 +1,22 @@
+{
+    "expenses": [
+        {
+            "amount": 400.0,
+            "description": "Conta de Luz"
+        },
+        {
+            "amount": 425.0,
+            "description": "Conta de \u00c1gua"
+        }
+    ],
+    "incomes": [
+        {
+            "amount": 500.0,
+            "description": "Venda de Produto A"
+        },
+        {
+            "amount": 525.25,
+            "description": "Venda do Produto B"
+        }
+    ]
+}
