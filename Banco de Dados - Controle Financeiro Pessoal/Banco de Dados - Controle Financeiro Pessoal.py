@@ -91,11 +91,36 @@ def generate_report():
 
 # Função para salvar relatório em PDF
 def save_report_pdf(report_text):
-    c = canvas.Canvas("relatorio_financeiro.pdf", pagesize=letter)
-    width, height = letter
-    c.drawString(100, height - 100, report_text)
+    from reportlab.lib.pagesizes import letter
+    
+    nome_arquivo = "relatorio_financeiro.pdf"
+    c = canvas.Canvas(nome_arquivo, pagesize=letter)
+    largura, altura = letter
+    
+    # Dividir o texto em linhas
+    linhas = report_text.split('\n')
+    
+    # Definir a fonte (ajustada para parecer com o exemplo)
+    fonte = "Helvetica"
+    tamanho_fonte = 14
+    c.setFont(fonte, tamanho_fonte)
+    
+    # Posição vertical inicial (meio da página para cima)
+    y_atual = altura - 150 
+    
+    for linha in linhas:
+        # Calcular a largura do texto para centralizar
+        largura_texto = c.stringWidth(linha, fonte, tamanho_fonte)
+        x_centralizado = (largura - largura_texto) / 2
+        
+        # Desenhar a linha centralizada
+        c.drawString(x_centralizado, y_atual, linha)
+        
+        # Espaçamento entre linhas
+        y_atual -= 25 
+    
     c.save()
-    messagebox.showinfo("Sucesso", "Relatório salvo como PDF!")
+    messagebox.showinfo("Sucesso", f"Relatório salvo como {nome_arquivo}!")
 
 # Função para exibir despesas e receitas em uma nova janela
 def view_records():
