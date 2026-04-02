@@ -56,8 +56,10 @@ def generate_graphs():
     def make_autopct(values):
         def my_autopct(pct):
             total = sum(values)
-            val = int(round(pct * total / 100.0))
-            return f'{pct:.1f}%\nR$ {val:,}'
+            val = pct * total / 100.0
+            # Formata o valor com vírgula para decimal e ponto para milhar
+            val_formatado = f"{val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+            return f'{pct:.1f}%\nR$ {val_formatado}'
         return my_autopct
 
     plt.figure(figsize=(10, 5))
